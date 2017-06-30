@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myAdmin">
+
+<head>
+	<title>Interview Portal - Sarthak Langde</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<!--<link href="css/styles.css" rel="stylesheet" type="text/css" />-->
+	<script src="lib/jquery.min.js"></script>
+	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<script src="lib/angular.min.js"></script>
+	<script src="lib/bootstrap.min.js"></script>
+
+	
+	<script src="app.js"></script>
+	
+</head>
+
+<body >
+
+
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+				 aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+      			</button>
+				<a class="navbar-brand" href="#">Task Tracker</a>
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="/logout">Logout</a></li>
+
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container-fluid -->
+	</nav>
+
+
+	
+	
+
+	<div class="content">
+		<div ng-controller="AdminController">
+			<center><h1 style="color: #fff">Welcome, Admin</h1></center>
+			<div class="row" style="margin-top:2%;margin-left:8%;margin-right:10%">
+				<form ng-submit="invitebyemail()">
+					
+					<div class="col-sm-10"><input type="email" class="form-control" placeholder="Email" ng-model="email" required/></div>
+					<div class="col-sm-2"><input type="submit" class="btn btn-primary"  style="display: block; width: 100%;" class="form-control" value="Invite"/></div>
+					
+					
+				</form>
+			</div>
+			
+			<div style="padding-left:9%;padding-right:10%;margin-top:5%" ng-show="listquiz">	
+				<center><h3>List of Quizes</h3></center>
+				<table class="table table-bordered">
+					<tr>
+						<th> Email </th>
+						<th> Score </th>
+					</tr>				
+					<tr ng-repeat="quiz in listquiz">
+						<td> {{quiz.email}} ({{quiz.url}})</td>
+						<td> {{quiz.status == 0 ? "Not Attempted" : quiz.score}}</td>
+						
+					</tr>
+				</table>
+			</div>
+			
+
+		</div>
+	</div>
+</body>
+
+</html>

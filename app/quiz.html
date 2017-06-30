@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myQuiz">
+
+<head>
+	<title>Interview Portal - Sarthak Langde</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<!--<link href="css/styles.css" rel="stylesheet" type="text/css" />-->
+	<script src="/lib/jquery.min.js"></script>
+	<link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<script src="/lib/angular.min.js"></script>
+	<script src="/lib/bootstrap.min.js"></script>
+
+
+	<script src="quiz.js"></script>
+
+</head>
+
+<body style="background-color: rgb(234, 94, 27);">
+
+
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+				 aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+      			</button>
+				<a class="navbar-brand" href="#">Interview Portal</a>
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container-fluid -->
+	</nav>
+
+
+
+	
+
+	<div class="content">
+		<div ng-controller="QuizController">
+			<div ng-hide="submittedscore">
+				<form ng-submit="subquiz()">
+					<div ng-repeat="question in questions">
+						{{question.text}} 
+						<input type="radio" ng-model="question.selected" value="a" ng-required="!question.selected">{{question.a}}
+						<input type="radio" ng-model="question.selected" value="b" ng-required="!question.selected">{{question.b}}
+						<input type="radio" ng-model="question.selected" value="c" ng-required="!question.selected">{{question.c}}
+						<input type="radio" ng-model="question.selected" value="d" ng-required="!question.selected">{{question.d}}
+					</div>
+					<div> <input type="submit" class="btn col-lg-2 col-xs-12" value="Submit Quiz"></div>
+				</form>
+			</div>
+			<div ng-show="submittedscore">
+				<div class="well" style="padding:5%;margin-left:15%;margin-right:15%;margin-top:10%; font-size: 16px">
+					<p>Thank you for taking the quiz. </p>
+					<p><strong>You Scored: {{submittedscore}}/5</strong></p>
+					<p><em>You can only give the test once. To give another test, contact the test administrator</em></p>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</body>
+
+</html>
