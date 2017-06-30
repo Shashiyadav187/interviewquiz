@@ -67,8 +67,8 @@ app.post('/invite',function(req,res){
     let transporter= nodemailer.createTransport({
         service: "Gmail",
     auth: {
-        user: emailauth.email, // service is detected from the username
-        pass: emailauth.password
+        user: process.env.authemail, // service is detected from the username
+        pass: process.env.authpass
         }
     });
 

@@ -2,7 +2,7 @@ var GoogleStrategy = require('passport-google-oauth20').Strategy;
 var LocalStrategy = require('passport-local').Strategy;
 var User = require('../models/users');
 var Admin = require('../models/admin');
-var configAuth = require('../config/auth');
+//var configAuth = require('../config/auth');
 //var configAuth = require('./fbauth');  
 module.exports = function(passport) {
 
@@ -43,9 +43,9 @@ module.exports = function(passport) {
 
 
 	passport.use(new GoogleStrategy({  
-		clientID: configAuth.googleAuth.clientID,
-		clientSecret: configAuth.googleAuth.clientSecret,
-		callbackURL: configAuth.googleAuth.callbackURL,
+		clientID: process.env.clientid,
+		clientSecret:process.env.clientsecret,
+		callbackURL: "/auth/google/callback",
 		//callbackURL: "http://localhost:3000/auth/facebook/callback",
 		//passReqToCallback : true,
 		//profileFields: ['id', 'email', 'first_name', 'last_name'],
