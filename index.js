@@ -77,7 +77,7 @@ app.post('/invite',function(req,res){
         to: req.body.email, // list of receivers
         subject: 'Interview Invite Link', // Subject line
         text: "Click this link for interview", // plain text body
-        html: '<a href="http://localhost:3000/url/'+shortidgen+'">Click to take the test or view score</a>' // html body
+        html: '<a href="http://nginterviewquiz.herokuapp.com/url/'+shortidgen+'">Click to take the test or view score</a>' // html body
     };
 
     // send mail with defined transport object
