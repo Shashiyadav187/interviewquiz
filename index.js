@@ -39,7 +39,6 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-const emailauth = require('./auth');
 
 app.get('/failure',function(req,res){
     res.sendFile(__dirname+'/app/error_invalid.html');
