@@ -14,7 +14,7 @@ myAdmin.controller('AdminController',['$scope','$http','$window','$timeout',func
         $scope.email = "";
         $timeout(function() {
             $window.location.reload();
-        }, 2000);
+        }, 4000);
         
     }
 

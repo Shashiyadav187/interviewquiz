@@ -65,7 +65,7 @@ myQuiz.controller('QuizController',['$scope','$http','$location','$window',funct
         $http.put("/quiz/"+$scope.shortid,obj).
         then(function(response){
             console.log("Quiz submitted succesfully");
-            $window.location.reload();
+           
         });
         
     };

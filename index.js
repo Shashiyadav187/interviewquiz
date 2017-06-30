@@ -15,7 +15,7 @@ const bodyParser = require('body-parser');
 const shortid = require('shortid');
 
 //Connect to mongoose
-mongoose.connect('mongodb://localhost/interviewdb');
+mongoose.connect('mongodb://'+process.env.dbuser+':'+process.env.dbpass+'@ds145312.mlab.com:45312/nginterviewquiz');
 mongoose.Promise = global.Promise;
 
 const TestModel = require('./app/models/tests');
@@ -121,7 +121,7 @@ app.get('/listinvite',function(req,res){
 // });
 app.post('/login', passport.authenticate('local', 
     { successRedirect : '/admin', // redirect to the secure profile section
-        failureRedirect : '/failure', // redirect back to the signup page if there is an error
+        failureRedirect : '/', // redirect back to the signup page if there is an error
         failureFlash : true }),
   function(req, res) {
     //console.log(req.body);
