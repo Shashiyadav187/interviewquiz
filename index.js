@@ -20,7 +20,7 @@ mongoose.Promise = global.Promise;
 
 const TestModel = require('./app/models/tests');
 const QuizModel = require('./app/models/questions');
-
+const UserModel = require('./app/models/users');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true})); 
@@ -42,7 +42,11 @@ app.use(passport.session());
 const emailauth = require('./auth');
 
 app.get('/failure',function(req,res){
-    res.sendFile(__dirname+'/app/404.html');
+    res.sendFile(__dirname+'/app/error_invalid.html');
+});
+
+app.get('/authfailure',function(req,res){
+    res.sendFile(__dirname+'/app/error_403.html');
 });
 
 app.get('/auth/google',
@@ -118,7 +122,7 @@ app.get('/listinvite',function(req,res){
 // });
 app.post('/login', passport.authenticate('local', 
     { successRedirect : '/admin', // redirect to the secure profile section
-        failureRedirect : '/', // redirect back to the signup page if there is an error
+        failureRedirect : '/failure', // redirect back to the signup page if there is an error
         failureFlash : true }),
   function(req, res) {
     //console.log(req.body);
@@ -136,8 +140,11 @@ app.get('/questions', function(req,res){
 app.get('/status/:urlid',function(req,res){
 
     TestModel.findOne({url: req.params.urlid},function(err, result){
+        
         if(!err){
             res.send(result);
+        }else{
+            res.send(err);
         }
     });
 });
@@ -162,22 +169,41 @@ app.put('/quiz/:urlid', function(req,res){
 //app.get('/auth/google',  passport.authenticate('google',  { scope:   	['profile', 'email'] }));
 
 app.get('/url/:urlid', function(req, res, next) {
-    console.log("ABCDEF",req.params.urlid);
+    //console.log("ABCDEF",req.params.urlid);
     if(!req.user){
-        console.log("EFG");
+        //console.log("EFG");
         req.session.returnTo = "/url/"+req.params.urlid;
         passport.authenticate('google', { scope:['profile', 'email'] }, function(err, user, info) {
             if (err) { return next(err); }
             if (!user) { return res.redirect('/url/'+urlid); }
             req.logIn(user, function(err) {
             if (err) { return next(err); }
-            return res.redirect('/apple');
+            return res.redirect('/failure');
             });
         })(req, res, next);
     }
     else{
-        console.log("HIJ");
-        res.redirect('/failure');
+        
+        TestModel.findOne({url: req.params.urlid},function(err, result){
+            
+            if(result!=null){
+               
+                if(req.user.email == result.email){
+                    res.redirect("/quiz/"+req.params.urlid);
+                }
+                else{
+                    
+                    res.redirect('/authfailure');
+                }
+            }
+            else{
+                res.redirect('/failure');
+            }
+            
+            
+        });
+        
+        
     }    
   
 });

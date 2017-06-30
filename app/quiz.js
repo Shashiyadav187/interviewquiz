@@ -1,7 +1,7 @@
 var myQuiz = angular.module('myQuiz',[]);
 
 myQuiz.config(['$locationProvider', function($locationProvider) {
-        //$locationProvider.hashPrefix('');
+       //$locationProvider.html5Mode(true);
         $locationProvider.html5Mode({
             enabled: true,
             requireBase: false
@@ -15,7 +15,10 @@ myQuiz.controller('QuizController',['$scope','$http','$location','$window',funct
 
     $http.get('/status/'+$scope.shortid).
     then(function(respon){
-        if(respon.data.status == 0){
+        if(respon.data == ""){
+            $window.location.href = '/failure';
+        }
+        else if(respon.data.status == 0){
             $http.get('/questions').
             then(function(response){
                 $scope.questions =[];
