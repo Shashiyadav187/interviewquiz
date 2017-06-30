@@ -1,6 +1,7 @@
 var myQuiz = angular.module('myQuiz',[]);
 
 myQuiz.config(['$locationProvider', function($locationProvider) {
+        //$locationProvider.hashPrefix('');
         $locationProvider.html5Mode({
             enabled: true,
             requireBase: false

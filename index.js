@@ -41,6 +41,10 @@ app.use(passport.session());
 
 const emailauth = require('./auth');
 
+app.get('/failure',function(req,res){
+    res.sendFile(__dirname+'/app/404.html');
+});
+
 app.get('/auth/google',
   passport.authenticate('google',  { scope: 
   	['profile', 'email'] }));
@@ -160,6 +164,7 @@ app.put('/quiz/:urlid', function(req,res){
 app.get('/url/:urlid', function(req, res, next) {
     console.log("ABCDEF",req.params.urlid);
     if(!req.user){
+        console.log("EFG");
         req.session.returnTo = "/url/"+req.params.urlid;
         passport.authenticate('google', { scope:['profile', 'email'] }, function(err, user, info) {
             if (err) { return next(err); }
@@ -171,7 +176,8 @@ app.get('/url/:urlid', function(req, res, next) {
         })(req, res, next);
     }
     else{
-        res.redirect('/quiz/'+req.params.urlid);
+        console.log("HIJ");
+        res.redirect('/failure');
     }    
   
 });

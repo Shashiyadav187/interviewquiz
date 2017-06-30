@@ -48,22 +48,23 @@
 			<div ng-hide="submittedscore">
 				<form ng-submit="subquiz()">
 					<div style="padding-left:5%;margin-top:2%;padding-right:5%">
-						<div class="well" style="padding:3%" ng-repeat="question in questions">
-							<div class="row"><strong>{{question.text}} </strong></div>
+						<div class="well" style="padding-left:5%;padding-right:5%;padding-top:2%; height:30vh" ng-repeat="question in questions">
+							<div class="row" style="margin-bottom:2%"><strong>{{question.text}} </strong></div>
 							
-							<div class="col-md-6"><input type="radio" ng-model="question.selected" value="a" ng-required="!question.selected">{{question.a}}</div>
-							<div class="col-md-6"><input type="radio" ng-model="question.selected" value="b" ng-required="!question.selected">{{question.b}}</div>
-							<div class="col-md-6"><input type="radio" ng-model="question.selected" value="c" ng-required="!question.selected">{{question.c}}</div>
-							<div class="col-md-6"><input type="radio" ng-model="question.selected" value="d" ng-required="!question.selected">{{question.d}}</div>
+							<div class="col-md-6" style="padding:1%"><input type="radio" ng-model="question.selected" value="a" ng-required="!question.selected">{{question.a}}</div>
+							<div class="col-md-6" style="padding:1%"><input type="radio" ng-model="question.selected" value="b" ng-required="!question.selected">{{question.b}}</div>
+							<div class="col-md-6" style="padding:1%"><input type="radio" ng-model="question.selected" value="c" ng-required="!question.selected">{{question.c}}</div>
+							<div class="col-md-6" style="padding:1%"><input type="radio" ng-model="question.selected" value="d" ng-required="!question.selected">{{question.d}}</div>
 						</div>
 					</div>
 					<div> <input type="submit" style="float:right;margin-right:5%;margin-top:1%;margin-bottom:2%" class="btn btn-lg btn-success" value="Submit Quiz"></div>
 				</form>
 			</div>
 			<div ng-show="submittedscore">
-				<div class="well" style="padding:5%;margin-left:15%;margin-right:15%;margin-top:10%; font-size: 16px">
-					<p>Thank you for taking the quiz. </p>
+				<div class="well panel-success" style="padding-left:10%;padding-right:10%;padding-top:5%;padding-bottom:5%;margin-left:15%;margin-right:15%;margin-top:5%; font-size: 16px">
 					<p><strong>You Scored: {{submittedscore}}/5</strong></p>
+					<p>Thank you for taking the quiz. </p>
+					
 					<p><em>You can only give the test once. To give another test, contact the test administrator</em></p>
 				</div>
 			</div>
