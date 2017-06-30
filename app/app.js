@@ -1,7 +1,7 @@
 var myAdmin = angular.module('myAdmin',[]);
 
 
-myAdmin.controller('AdminController',['$scope','$http',function($scope,$http){
+myAdmin.controller('AdminController',['$scope','$http','$window',function($scope,$http,$window){
     
     $scope.invitebyemail = function(){
         var newobj = {
@@ -9,9 +9,10 @@ myAdmin.controller('AdminController',['$scope','$http',function($scope,$http){
         }
         $http.post('./invite',newobj).
             then(function(response) {
-                console.log("RESPONS",response);
+                console.log("RESPONSE",response);
         });
         $scope.email = "";
+        $window.location.reload();
     }
 
     $http.get('/listinvite').

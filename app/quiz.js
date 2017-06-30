@@ -7,7 +7,7 @@ myQuiz.config(['$locationProvider', function($locationProvider) {
         });
     }]);
 
-myQuiz.controller('QuizController',['$scope','$http','$location',function($scope,$http,$location){
+myQuiz.controller('QuizController',['$scope','$http','$location','$window',function($scope,$http,$location,$window){
     
     $scope.shortid = $location.url().split('/')[2];
     console.log($scope.shortid);
@@ -34,7 +34,9 @@ myQuiz.controller('QuizController',['$scope','$http','$location',function($scope
 
                     $scope.questions.push(newquestion);
                     $scope.answers.push(newanswer);
+                   
                 });
+                
             });
         }
         else{
@@ -59,6 +61,7 @@ myQuiz.controller('QuizController',['$scope','$http','$location',function($scope
         $http.put("/quiz/"+$scope.shortid,obj).
         then(function(response){
             console.log("Quiz submitted succesfully");
+            $window.location.reload();
         });
         
     };

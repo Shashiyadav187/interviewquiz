@@ -15,7 +15,7 @@
 
 </head>
 
-<body style="background-color: rgb(234, 94, 27);">
+<body style="">
 
 
 	<nav class="navbar navbar-default">
@@ -47,14 +47,17 @@
 		<div ng-controller="QuizController">
 			<div ng-hide="submittedscore">
 				<form ng-submit="subquiz()">
-					<div ng-repeat="question in questions">
-						{{question.text}} 
-						<input type="radio" ng-model="question.selected" value="a" ng-required="!question.selected">{{question.a}}
-						<input type="radio" ng-model="question.selected" value="b" ng-required="!question.selected">{{question.b}}
-						<input type="radio" ng-model="question.selected" value="c" ng-required="!question.selected">{{question.c}}
-						<input type="radio" ng-model="question.selected" value="d" ng-required="!question.selected">{{question.d}}
+					<div style="padding-left:5%;margin-top:2%;padding-right:5%">
+						<div class="well" style="padding:3%" ng-repeat="question in questions">
+							<div class="row"><strong>{{question.text}} </strong></div>
+							
+							<div class="col-md-6"><input type="radio" ng-model="question.selected" value="a" ng-required="!question.selected">{{question.a}}</div>
+							<div class="col-md-6"><input type="radio" ng-model="question.selected" value="b" ng-required="!question.selected">{{question.b}}</div>
+							<div class="col-md-6"><input type="radio" ng-model="question.selected" value="c" ng-required="!question.selected">{{question.c}}</div>
+							<div class="col-md-6"><input type="radio" ng-model="question.selected" value="d" ng-required="!question.selected">{{question.d}}</div>
+						</div>
 					</div>
-					<div> <input type="submit" class="btn col-lg-2 col-xs-12" value="Submit Quiz"></div>
+					<div> <input type="submit" style="float:right;margin-right:5%;margin-top:1%;margin-bottom:2%" class="btn btn-lg btn-success" value="Submit Quiz"></div>
 				</form>
 			</div>
 			<div ng-show="submittedscore">

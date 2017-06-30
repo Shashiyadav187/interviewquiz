@@ -177,12 +177,14 @@ app.get('/url/:urlid', function(req, res, next) {
 });
 
 
-// app.get('/url/:urlid',function(req,res){
-//     res.end();
-// });
-
 app.get('/admin',function(req,res){
-    res.sendFile(__dirname+'/app/admin.html');
+    if(!req.user){
+        res.redirect('/');
+    }
+    else{
+        res.sendFile(__dirname+'/app/admin.html');
+    }
+    
 });
 
 app.get('/logout', function(req, res){
