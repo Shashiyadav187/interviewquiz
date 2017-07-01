@@ -1,7 +1,7 @@
-var myAdmin = angular.module('myAdmin',[]);
+var myAdmin = angular.module('myAdmin',['ngFlash']);
 
 
-myAdmin.controller('AdminController',['$scope','$http','$window','$timeout',function($scope,$http,$window,$timeout){
+myAdmin.controller('AdminController',['$scope','$http','$window','$timeout','Flash',function($scope,$http,$window,$timeout,Flash){
     
     $scope.invitebyemail = function(){
         var newobj = {
@@ -12,10 +12,14 @@ myAdmin.controller('AdminController',['$scope','$http','$window','$timeout',func
                 console.log("RESPONSE",response);
         });
         $scope.email = "";
-        $timeout(function() {
-            $window.location.reload();
-        }, 4000);
+        var message = 'Invite Sent Successfully';
+        var id = Flash.create('success', message, 0, {class: 'custom-class', id: 'custom-id'}, true);
         
+        
+    }
+
+    $scope.reloadpage=function(){
+        $window.location.reload();    
     }
 
     $http.get('/listinvite').

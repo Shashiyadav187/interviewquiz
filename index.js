@@ -39,6 +39,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
+
+
 app.get('/failure',function(req,res){
     res.sendFile(__dirname+'/app/error_invalid.html');
 });
@@ -115,9 +117,7 @@ app.get('/listinvite',function(req,res){
     });
 });
 
-// app.post('/login',function(req,res){
-//     console.log(req.body);
-// });
+
 app.post('/login', passport.authenticate('local', 
     { successRedirect : '/admin', // redirect to the secure profile section
         failureRedirect : '/', // redirect back to the signup page if there is an error
@@ -157,9 +157,6 @@ app.put('/quiz/:urlid', function(req,res){
     TestModel.update({url: req.params.urlid},{$set: {status: 1, score: req.body.score}}, function(){
         console.log("Scores Updated");
     });
-    // QuizModel.findOneAndUpdate({url: req.params.urlid},{
-    //     url: req.params.urlid
-    // })
     res.sendStatus(200);
    
 });
@@ -222,10 +219,6 @@ app.get('/logout', function(req, res){
 		res.redirect('/');
 });
 
-app.get('/logout', function(req, res){
-		req.logout();
-		res.redirect('/');
-});
 
 app.listen(process.env.PORT || 3000, function () {
 	console.log("Listening on port...");
