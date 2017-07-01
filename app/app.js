@@ -12,15 +12,15 @@ myAdmin.controller('AdminController',['$scope','$http','$window','$timeout','Fla
                 console.log("RESPONSE",response);
         });
         $scope.email = "";
-        var message = 'Invite Sent Successfully';
+        var message = 'Invitation link sent successfully!';
         var id = Flash.create('success', message, 0, {class: 'custom-class', id: 'custom-id'}, true);
-        
+        $timeout(function() {
+            $window.location.reload();
+        }, 5000);
         
     }
 
-    $scope.reloadpage=function(){
-        $window.location.reload();    
-    }
+    
 
     $http.get('/listinvite').
     then(function(response){
